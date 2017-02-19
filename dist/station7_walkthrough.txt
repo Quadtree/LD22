@@ -1,0 +1,11 @@
+From the room you start out in, move to the right. In this room, there will be two manual fragments in the lower right and left corners. Grab these, and they will combine into a manual. Use the manual to activate the console in the upper left corner, and press "Disengage". Then close the console by pressing "Close Console".
+
+For the next two tasks, you need to build a robot. Go to the room across the hall from the one you started in and collect the tracks. You then need to go back to the room with the console, and then up. Pass the large flamethrower and enter the lab to the right, and get the motor. You will now have a robot. Go back to the large flamethrower and stand above its right side. Face the back of the flamethrower, and press the robot twice to activate it. It will drive down and push the back of the flamethrower, turning it around and detonating the exploding barrels, which will break the gate.
+
+Now you need to extend the bridge. Go back to the room with the console, and travel to the south. When you get to a flamethrower in the corridor, use the same technique as above to send the robot towards the block in the middle of the hall. When the robot gets stuck, it should be blocking the flame. Use this to get around it and bump the console. On the console window, press "Disable" and "Extend". Then close the window by clicking "Close Console".
+
+Now travel up, past the large flamethrower, through the wall you broke earlier and across the now extended bridge. Bypass the overheated core and move across the second bridge. After this, take the first door on the right and enter another lab. Collect the radio here. Now go across the hall to master control, and collect the joystick, which is attached to one of the consoles. Now travel up out of this area and into north village. There are six buildings, and the top right one contains another radio. Grab it, and you should now have a RC Robot and a Remote Control.
+
+Head back to the core. Launch the RC Robot just like you would the normal robot, and then double click the Remote Control to take remote control of it. Guide the robot by clicking on the ground through the core and onto the red button.
+
+This will reactivate the tram. Just head north until you see "EXIT", and you win!
