@@ -1,21 +1,20 @@
 package com.ironalloygames.station7.gui;
 
-import javax.swing.GroupLayout.Alignment;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.ironalloygames.station7.Game;
 import com.ironalloygames.station7.Sounds;
 import com.ironalloygames.station7.actor.Actor;
 import com.ironalloygames.station7.actor.DiagnosticLockedDoor;
 
-public class DiagnosticConsoleGUI extends Widget {
-	final Button closeButton = new Button();
-	final Button disengageButton = new Button();
-	final Label lockdownLabel = new Label("", null);
-	final Label warningLabel = new Label("", null);
+public class DiagnosticConsoleGUI extends WidgetAdapter {
+	final TextButton closeButton = GuiUtil.createButton("", null);
+	final TextButton disengageButton = GuiUtil.createButton("", null);
+	final Label lockdownLabel = GuiUtil.createLabel("");
+	final Label warningLabel = GuiUtil.createLabel("");
 
 	public DiagnosticConsoleGUI() {
 
@@ -27,10 +26,10 @@ public class DiagnosticConsoleGUI extends Widget {
 		disengageButton.setText("Disengage");
 		add(disengageButton);
 
-		disengageButton.addCallback(new Runnable() {
+		disengageButton.addListener(new ChangeListener() {
 
 			@Override
-			public void run() {
+			public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
 				for (Actor a : Game.s.state.actors) {
 					if (a instanceof DiagnosticLockedDoor) {
 						((DiagnosticLockedDoor) a).open();
@@ -42,10 +41,10 @@ public class DiagnosticConsoleGUI extends Widget {
 			}
 		});
 
-		closeButton.addCallback(new Runnable() {
+		closeButton.addListener(new ChangeListener() {
 
 			@Override
-			public void run() {
+			public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
 				DiagnosticConsoleGUI.this.setVisible(false);
 				Game.s.playerGUI.setVisible(true);
 				Sounds.click.play();
@@ -67,11 +66,11 @@ public class DiagnosticConsoleGUI extends Widget {
 		lockdownLabel.setPosition(100, this.getInnerBottom() - 200);
 
 		disengageButton.setPosition(450, this.getInnerBottom() - 250);
-		disengageButton.setAlignment(Alignment.CENTER);
+		disengageButton.align(Align.center);
 		disengageButton.setSize(250, 90);
 
 		closeButton.setPosition(this.getInnerRight() - 300, this.getInnerBottom() - 150);
-		closeButton.setAlignment(Alignment.CENTER);
+		closeButton.align(Align.center);
 		closeButton.setSize(250, 90);
 
 		super.layout();

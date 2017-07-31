@@ -1,21 +1,22 @@
 package com.ironalloygames.station7.gui;
 
-import javax.swing.GroupLayout.Alignment;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.ironalloygames.station7.Game;
 import com.ironalloygames.station7.Sounds;
 
-public class RobotGUI extends com.badlogic.gdx.scenes.scene2d.ui.Widget {
-	final Button exitControlButton = new Button();
+public class RobotGUI extends WidgetAdapter {
+	final TextButton exitControlButton = GuiUtil.createButton("", null);
 
 	public RobotGUI() {
 		exitControlButton.setText("Exit Robot Control");
 
-		exitControlButton.addCallback(new Runnable() {
+		exitControlButton.addListener(new ChangeListener() {
 
 			@Override
-			public void run() {
+			public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
 				Game.s.state.conObj = Game.s.state.player;
 				Game.s.playerGUI.setVisible(true);
 				Game.s.robotGUI.setVisible(false);
@@ -29,11 +30,11 @@ public class RobotGUI extends com.badlogic.gdx.scenes.scene2d.ui.Widget {
 	}
 
 	@Override
-	protected void layout() {
+	public void layout() {
 		setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		exitControlButton.setSize(300, 90);
-		exitControlButton.setAlignment(Alignment.CENTER);
+		exitControlButton.align(Align.center);
 		exitControlButton.setPosition(this.getInnerWidth() / 2 - exitControlButton.getWidth() / 2, 50);
 
 		super.layout();

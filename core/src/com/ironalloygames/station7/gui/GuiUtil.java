@@ -31,9 +31,11 @@ public class GuiUtil {
 		return b;
 	}
 
-	public static Button createButton(String text, ChangeListener list) {
+	public static TextButton createButton(String text, ChangeListener list) {
 		TextButton ret = new TextButton(text, defaultButtonStyle);
-		ret.addListener(list);
+		if (list != null) {
+			ret.addListener(list);
+		}
 		ret.getCells().get(0).padLeft(5).padRight(5).padTop(0).padBottom(0);
 		return ret;
 	}
@@ -81,8 +83,8 @@ public class GuiUtil {
 
 		mainFont = new BitmapFont();
 		defaultLabelStyle = new LabelStyle(mainFont, Color.WHITE);
-		defaultDialogStyle = new WindowStyle(mainFont, Color.WHITE, new NinePatchDrawable(atlas.createPatch("dialog1")));
-		defaultButtonStyle = new TextButtonStyle(new NinePatchDrawable(atlas.createPatch("dialog3")), new NinePatchDrawable(atlas.createPatch("dialog2")), new NinePatchDrawable(atlas.createPatch("dialog3")), mainFont);
-		defaultTooltipStyle = new TextTooltipStyle(defaultLabelStyle, new NinePatchDrawable(atlas.createPatch("dialog1")));
+		defaultDialogStyle = new WindowStyle(mainFont, Color.WHITE, new NinePatchDrawable(atlas.createPatch("dialog")));
+		defaultButtonStyle = new TextButtonStyle(new NinePatchDrawable(atlas.createPatch("button")), new NinePatchDrawable(atlas.createPatch("buttonclicked")), new NinePatchDrawable(atlas.createPatch("buttonclicked")), mainFont);
+		defaultTooltipStyle = new TextTooltipStyle(defaultLabelStyle, new NinePatchDrawable(atlas.createPatch("dialog")));
 	}
 }

@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.ironalloygames.station7.Sounds;
 import com.ironalloygames.station7.actor.Player;
 import com.ironalloygames.station7.item.Item;
 
-import de.matthiasmann.twl.textarea.HTMLTextAreaModel;
-
-public class PlayerGUI extends com.badlogic.gdx.scenes.scene2d.ui.Widget {
-	class InventoryButtonHandler implements Runnable {
+public class PlayerGUI extends WidgetAdapter {
+	class InventoryButtonHandler extends ChangeListener {
 		int ind;
 
 		public InventoryButtonHandler(int ind) {
@@ -20,12 +22,12 @@ public class PlayerGUI extends com.badlogic.gdx.scenes.scene2d.ui.Widget {
 		}
 
 		@Override
-		public void run() {
+		public void changed(ChangeEvent event, Actor actor) {
 			// System.out.println(ind + " clicked!");
 			Sounds.click.play();
 
 			if (ind < items.size()) {
-				model.setHtml("<html><body>" + items.get(ind).getDescription() + "</body></html>");
+				itemDesc.setText(items.get(ind).getDescription());
 
 				if (lastItemClick == ind) {
 					items.get(ind).use();
@@ -37,9 +39,9 @@ public class PlayerGUI extends com.badlogic.gdx.scenes.scene2d.ui.Widget {
 
 	}
 
-	final Button[] inventoryButtons = new Button[3];
+	final TextButton[] inventoryButtons = new TextButton[3];
 
-	final TextArea itemDesc = new TextArea();
+	final Label itemDesc = GuiUtil.createLabel("");
 
 	List<Item> items = new ArrayList<Item>();
 
@@ -47,25 +49,19 @@ public class PlayerGUI extends com.badlogic.gdx.scenes.scene2d.ui.Widget {
 
 	final Label[] messages = new Label[3];
 
-	final HTMLTextAreaModel model = new HTMLTextAreaModel();
-
 	public PlayerGUI() {
 		for (int i = 0; i < messages.length; i++) {
-			messages[i] = new Label();
+			messages[i] = GuiUtil.createLabel("");
 			add(messages[i]);
 		}
 
 		for (int i = 0; i < inventoryButtons.length; i++) {
-			inventoryButtons[i] = new Button();
+			inventoryButtons[i] = GuiUtil.createButton("", null);
 
-			inventoryButtons[i].addCallback(new InventoryButtonHandler(i));
+			inventoryButtons[i].addListener(new InventoryButtonHandler(i));
 
 			add(inventoryButtons[i]);
 		}
-
-		itemDesc.setModel(model);
-		itemDesc.setEnabled(false);
-		model.setHtml("<html><body></body></html>");
 
 		add(itemDesc);
 
@@ -83,7 +79,7 @@ public class PlayerGUI extends com.badlogic.gdx.scenes.scene2d.ui.Widget {
 	}
 
 	@Override
-	protected void layout() {
+	public void layout() {
 		setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		for (int i = 0; i < inventoryButtons.length; i++) {
@@ -106,11 +102,11 @@ public class PlayerGUI extends com.badlogic.gdx.scenes.scene2d.ui.Widget {
 		items = pl.getInventory();
 		for (int i = 0; i < inventoryButtons.length; i++) {
 			if (i < items.size()) {
-				inventoryButtons[i].setTheme(items.get(i).getClass().getSimpleName().toLowerCase());
-				inventoryButtons[i].reapplyTheme();
+				// inventoryButtons[i].setTheme(items.get(i).getClass().getSimpleName().toLowerCase());
+				// inventoryButtons[i].reapplyTheme();
 			} else {
-				inventoryButtons[i].setTheme("button");
-				inventoryButtons[i].reapplyTheme();
+				// inventoryButtons[i].setTheme("button");
+				// inventoryButtons[i].reapplyTheme();
 			}
 		}
 
