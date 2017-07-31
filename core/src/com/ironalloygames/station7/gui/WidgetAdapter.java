@@ -1,11 +1,12 @@
 package com.ironalloygames.station7.gui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 
-public class WidgetAdapter extends Widget {
+public class WidgetAdapter extends WidgetGroup {
+
 	protected void add(Actor a) {
-		this.add(a);
+		this.addActor(a);
 	}
 
 	protected float getInnerBottom() {

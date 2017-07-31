@@ -53,7 +53,7 @@ public class Sprites {
 	public static Sprite tramEntrance;
 
 	public static void load() {
-		atlas = new TextureAtlas("pack");
+		atlas = new TextureAtlas("main.atlas");
 
 		ground = new Sprite[12];
 		ground[0] = atlas.createSprite("ground1");
