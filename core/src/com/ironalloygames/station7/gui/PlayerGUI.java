@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.ironalloygames.station7.Sounds;
 import com.ironalloygames.station7.actor.Player;
 import com.ironalloygames.station7.item.Item;
@@ -27,7 +29,7 @@ public class PlayerGUI extends WidgetAdapter {
 			Sounds.click.play();
 
 			if (ind < items.size()) {
-				itemDesc.setText(items.get(ind).getDescription());
+				itemDesc.setText(items.get(ind).getDescription().replace("<br/>", "\n"));
 
 				if (lastItemClick == ind) {
 					items.get(ind).use();
@@ -102,9 +104,11 @@ public class PlayerGUI extends WidgetAdapter {
 		items = pl.getInventory();
 		for (int i = 0; i < inventoryButtons.length; i++) {
 			if (i < items.size()) {
+				inventoryButtons[i].setBackground(new TextureRegionDrawable(items.get(i).getSpriteExternal()));
 				// inventoryButtons[i].setTheme(items.get(i).getClass().getSimpleName().toLowerCase());
 				// inventoryButtons[i].reapplyTheme();
 			} else {
+				inventoryButtons[i].setBackground((Drawable) null);
 				// inventoryButtons[i].setTheme("button");
 				// inventoryButtons[i].reapplyTheme();
 			}

@@ -2,22 +2,29 @@ package com.ironalloygames.station7.item;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Shape;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.ironalloygames.station7.Game;
-import com.ironalloygames.station7.Sprites;
 import com.ironalloygames.station7.actor.Entity;
 import com.ironalloygames.station7.actor.Player;
 
 public abstract class Item extends Entity {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -2872931941659695577L;
-	
+
 	transient boolean onGround;
+
+	@Override
+	public void collidedWith(Entity ent) {
+		if (ent instanceof Player) {
+			((Player) ent).addItemToInventory(this);
+			onGround = false;
+		}
+		super.collidedWith(ent);
+	}
 
 	@Override
 	public void gameStart() {
@@ -26,10 +33,8 @@ public abstract class Item extends Entity {
 	}
 
 	@Override
-	protected Shape getShape() {
-		CircleShape cs = new CircleShape();
-		cs.setRadius(0.15f);
-		return cs;
+	protected BodyType getBodyType() {
+		return BodyType.StaticBody;
 	}
 
 	@Override
@@ -37,17 +42,36 @@ public abstract class Item extends Entity {
 		return 0;
 	}
 
+	public abstract String getDescription();
+
+	@Override
+	protected Shape getShape() {
+		CircleShape cs = new CircleShape();
+		cs.setRadius(0.15f);
+		return cs;
+	}
+
+	protected abstract Sprite getSprite();
+
+	public Sprite getSpriteExternal() {
+		return this.getSprite();
+	}
+
+	public abstract String getTitle();
+
 	@Override
 	protected boolean isSensor() {
 		return true;
 	}
 
 	@Override
-	protected BodyType getBodyType() {
-		return BodyType.StaticBody;
+	public boolean keep() {
+		if (!onGround) {
+			destroyBody();
+			return false;
+		}
+		return true;
 	}
-	
-	protected abstract Sprite getSprite();
 
 	@Override
 	public void render(SpriteBatch batch) {
@@ -55,35 +79,10 @@ public abstract class Item extends Entity {
 		super.render(batch);
 	}
 
-	@Override
-	public void collidedWith(Entity ent) {
-		if(ent instanceof Player)
-		{
-			((Player)ent).addItemToInventory(this);
-			onGround = false;
-		}
-		super.collidedWith(ent);
-	}
-
-	@Override
-	public boolean keep() {
-		if(!onGround)
-		{
-			destroyBody();
-			return false;
-		}
-		return true;
-	}
-	
-	public abstract String getDescription();
-	public abstract String getTitle();
-	
-	public Item tryCombineWith(Item i)
-	{
+	public Item tryCombineWith(Item i) {
 		return null;
 	}
-	
-	public void use()
-	{
+
+	public void use() {
 	}
 }
