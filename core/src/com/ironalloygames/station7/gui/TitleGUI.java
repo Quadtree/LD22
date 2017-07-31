@@ -9,7 +9,7 @@ public class TitleGUI extends com.badlogic.gdx.scenes.scene2d.ui.Widget {
 	}
 
 	@Override
-	protected void layout() {
+	public void layout() {
 		setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		super.layout();
 	}

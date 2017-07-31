@@ -1,21 +1,22 @@
 package com.ironalloygames.station7.gui;
 
-import javax.swing.GroupLayout.Alignment;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.ironalloygames.station7.Game;
 import com.ironalloygames.station7.Sounds;
 import com.ironalloygames.station7.actor.Actor;
 import com.ironalloygames.station7.actor.FlameNozzle;
 
-public class SecurityConsoleGUI extends Widget {
-	final Button bridgesButton = new Button();
-	final Label bridgesLabel = new Label();
-	final Button closeButton = new Button();
-	final Button pyroButton = new Button();
-	final Label pyroLabel = new Label();
-	final Label warningLabel = new Label();
+public class SecurityConsoleGUI extends WidgetAdapter {
+	final TextButton bridgesButton = GuiUtil.createButton("", null);
+	final Label bridgesLabel = GuiUtil.createLabel("");
+	final TextButton closeButton = GuiUtil.createButton("", null);
+	final TextButton pyroButton = GuiUtil.createButton("", null);
+	final Label pyroLabel = GuiUtil.createLabel("");
+	final Label warningLabel = GuiUtil.createLabel("");
 
 	public SecurityConsoleGUI() {
 		warningLabel.setText("!!! CODE RED !!!");
@@ -31,10 +32,10 @@ public class SecurityConsoleGUI extends Widget {
 		bridgesButton.setText("Extend");
 		add(bridgesButton);
 
-		pyroButton.addCallback(new Runnable() {
+		pyroButton.addListener(new ChangeListener() {
 
 			@Override
-			public void run() {
+			public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
 				for (Actor a : Game.s.state.actors) {
 					if (a instanceof FlameNozzle) {
 						((FlameNozzle) a).disabled = true;
@@ -45,20 +46,20 @@ public class SecurityConsoleGUI extends Widget {
 			}
 		});
 
-		closeButton.addCallback(new Runnable() {
+		closeButton.addListener(new ChangeListener() {
 
 			@Override
-			public void run() {
+			public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
 				SecurityConsoleGUI.this.setVisible(false);
 				Game.s.playerGUI.setVisible(true);
 				Sounds.click.play();
 			}
 		});
 
-		bridgesButton.addCallback(new Runnable() {
+		bridgesButton.addListener(new ChangeListener() {
 
 			@Override
-			public void run() {
+			public void changed(ChangeEvent event, com.badlogic.gdx.scenes.scene2d.Actor actor) {
 				Game.s.state.raiseBridges();
 				bridgesLabel.setText("Rift Bridges EXTENDED");
 				Sounds.click.play();
@@ -72,7 +73,7 @@ public class SecurityConsoleGUI extends Widget {
 	}
 
 	@Override
-	protected void layout() {
+	public void layout() {
 		setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		warningLabel.setPosition(100, 100);
@@ -80,17 +81,17 @@ public class SecurityConsoleGUI extends Widget {
 		pyroLabel.setPosition(100, 300);
 
 		pyroButton.setPosition(450, 250);
-		pyroButton.setAlignment(Alignment.CENTER);
+		pyroButton.align(Align.center);
 		pyroButton.setSize(250, 90);
 
 		bridgesLabel.setPosition(100, 400);
 
 		bridgesButton.setPosition(450, 350);
-		bridgesButton.setAlignment(Alignment.CENTER);
+		bridgesButton.align(Align.center);
 		bridgesButton.setSize(250, 90);
 
 		closeButton.setPosition(this.getInnerRight() - 300, this.getInnerBottom() - 150);
-		closeButton.setAlignment(Alignment.CENTER);
+		closeButton.align(Align.center);
 		closeButton.setSize(250, 90);
 
 		super.layout();
