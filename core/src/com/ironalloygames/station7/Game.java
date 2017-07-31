@@ -16,10 +16,9 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.ironalloygames.station7.actor.Entity;
 import com.ironalloygames.station7.gui.DiagnosticConsoleGUI;
+import com.ironalloygames.station7.gui.GuiUtil;
 import com.ironalloygames.station7.gui.MasterConsoleGUI;
 import com.ironalloygames.station7.gui.PlayerGUI;
 import com.ironalloygames.station7.gui.RobotGUI;
@@ -40,9 +39,7 @@ public class Game implements ApplicationListener, InputProcessor, ContactListene
 
 	public DiagnosticConsoleGUI diagnosticConsoleGUI;
 
-	Stage gui;
-
-	Widget guiRoot;
+	public Stage gui;
 
 	public MasterConsoleGUI masterConsoleGUI;
 
@@ -95,29 +92,30 @@ public class Game implements ApplicationListener, InputProcessor, ContactListene
 			throw new RuntimeException("World loading failed: " + e);
 		}
 
-		guiRoot = new Widget();
-		gui = new Stage(new ScreenViewport());
+		GuiUtil.init();
+
+		gui = new Stage();
 
 		diagnosticConsoleGUI = new DiagnosticConsoleGUI();
 		gui.addActor(diagnosticConsoleGUI);
 
 		securityConsoleGUI = new SecurityConsoleGUI();
-		guiRoot.add(securityConsoleGUI);
+		gui.addActor(securityConsoleGUI);
 
 		playerGUI = new PlayerGUI();
-		guiRoot.add(playerGUI);
+		gui.addActor(playerGUI);
 
 		robotGUI = new RobotGUI();
-		guiRoot.add(robotGUI);
+		gui.addActor(robotGUI);
 
 		winGUI = new WinGUI();
-		guiRoot.add(winGUI);
+		gui.addActor(winGUI);
 
 		masterConsoleGUI = new MasterConsoleGUI();
-		guiRoot.add(masterConsoleGUI);
+		gui.addActor(masterConsoleGUI);
 
 		titleGUI = new TitleGUI();
-		guiRoot.add(titleGUI);
+		gui.addActor(titleGUI);
 
 		playerGUI.addMessage("You awaken in the depths of Station 7.");
 
@@ -164,6 +162,13 @@ public class Game implements ApplicationListener, InputProcessor, ContactListene
 	}
 
 	@Override
+	public boolean mouseMoved(int x, int y) {
+		mx = x;
+		my = y;
+		return false;
+	}
+
+	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
 
@@ -191,7 +196,8 @@ public class Game implements ApplicationListener, InputProcessor, ContactListene
 		securityConsoleGUI.update();
 		masterConsoleGUI.update();
 
-		gui.render();
+		gui.act();
+		gui.draw();
 
 		while (msPassed < System.currentTimeMillis()) {
 			if (touchDown)
@@ -246,13 +252,6 @@ public class Game implements ApplicationListener, InputProcessor, ContactListene
 	public boolean touchDragged(int x, int y, int pointer) {
 		// if(playerGUI.isVisible() || robotGUI.isVisible())
 		// state.conObj.setDestination(state.screenToReal(x, y));
-		mx = x;
-		my = y;
-		return false;
-	}
-
-	@Override
-	public boolean touchMoved(int x, int y) {
 		mx = x;
 		my = y;
 		return false;

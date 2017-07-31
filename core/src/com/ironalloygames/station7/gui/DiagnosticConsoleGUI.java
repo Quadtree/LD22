@@ -18,6 +18,7 @@ public class DiagnosticConsoleGUI extends Widget {
 	final Label warningLabel = new Label("", null);
 
 	public DiagnosticConsoleGUI() {
+
 		warningLabel.setText("!!! CODE RED !!!");
 		add(warningLabel);
 		lockdownLabel.setText("Sector lockdown in effect.");
@@ -58,7 +59,7 @@ public class DiagnosticConsoleGUI extends Widget {
 	}
 
 	@Override
-	protected void layout() {
+	public void layout() {
 		setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		warningLabel.setPosition(100, 100);
