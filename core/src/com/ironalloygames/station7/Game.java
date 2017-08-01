@@ -95,11 +95,11 @@ public class Game implements ApplicationListener, InputProcessor, ContactListene
 
 			state.postDeserialize();
 
-			/*
-			 * Json j = new Json(); Writer fow = new OutputStreamWriter(new
-			 * FileOutputStream("world.json")); j.toJson(state, fow);
-			 * fow.close();
-			 */
+			// Writer fow = new OutputStreamWriter(new
+			// FileOutputStream("world.json"));
+			// j.toJson(state, fow);
+			// fow.close();
+
 		} catch (Exception e) {
 			throw new RuntimeException("World loading failed: ", e);
 		}

@@ -3,7 +3,6 @@ package com.ironalloygames.station7;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,9 +31,9 @@ public class GameState implements Serializable {
 
 	public static final int WORLD_WIDTH = 128;
 
-	public List<Actor> actors;
+	public ArrayList<Actor> actors;
 
-	transient List<Actor> addActorQueue;
+	transient ArrayList<Actor> addActorQueue;
 	transient SpriteBatch batch;
 
 	transient Body body;

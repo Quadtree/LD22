@@ -23,6 +23,7 @@ public class MasterConsoleGUI extends WidgetAdapter {
 		infoText.setText("Main Core Status: Critical\n\nOperator attention needed. Power output negligible due to instability. Safety systems offline.");
 
 		add(infoText);
+		infoText.setWrap(true);
 
 		reactivateButton.setText("Reactivate Safety Systems");
 		add(reactivateButton);
