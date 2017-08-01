@@ -37,7 +37,7 @@ public class GameState implements Serializable {
 	transient List<Actor> addActorQueue;
 	transient SpriteBatch batch;
 
-	Body body;
+	transient Body body;
 
 	transient boolean bridgesUp;
 	transient Matrix4 cameraMat;

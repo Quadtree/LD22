@@ -101,7 +101,7 @@ public class Game implements ApplicationListener, InputProcessor, ContactListene
 			 * fow.close();
 			 */
 		} catch (Exception e) {
-			throw new RuntimeException("World loading failed: " + e);
+			throw new RuntimeException("World loading failed: ", e);
 		}
 
 		GuiUtil.init();
