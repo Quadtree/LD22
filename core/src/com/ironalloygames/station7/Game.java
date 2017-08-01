@@ -1,6 +1,9 @@
 package com.ironalloygames.station7;
 
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -16,6 +19,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Json;
 import com.ironalloygames.station7.actor.Entity;
 import com.ironalloygames.station7.gui.DiagnosticConsoleGUI;
 import com.ironalloygames.station7.gui.GuiUtil;
@@ -88,6 +92,11 @@ public class Game implements ApplicationListener, InputProcessor, ContactListene
 			ObjectInputStream ois = new ObjectInputStream(Gdx.files.internal("world.dat").read());
 			state = (GameState) ois.readObject();
 			ois.close();
+
+			Json j = new Json();
+			Writer fow = new OutputStreamWriter(new FileOutputStream("world.json"));
+			j.toJson(state, fow);
+			fow.close();
 		} catch (Exception e) {
 			throw new RuntimeException("World loading failed: " + e);
 		}
