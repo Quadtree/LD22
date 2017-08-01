@@ -1,10 +1,5 @@
 package com.ironalloygames.station7;
 
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -89,14 +84,22 @@ public class Game implements ApplicationListener, InputProcessor, ContactListene
 		s = this;
 
 		try {
-			ObjectInputStream ois = new ObjectInputStream(Gdx.files.internal("world.dat").read());
-			state = (GameState) ois.readObject();
-			ois.close();
+			/*
+			 * ObjectInputStream ois = new
+			 * ObjectInputStream(Gdx.files.internal("world.dat").read()); state
+			 * = (GameState) ois.readObject(); ois.close();
+			 */
 
 			Json j = new Json();
-			Writer fow = new OutputStreamWriter(new FileOutputStream("world.json"));
-			j.toJson(state, fow);
-			fow.close();
+			state = j.fromJson(GameState.class, Gdx.files.internal("world.json"));
+
+			state.postDeserialize();
+
+			/*
+			 * Json j = new Json(); Writer fow = new OutputStreamWriter(new
+			 * FileOutputStream("world.json")); j.toJson(state, fow);
+			 * fow.close();
+			 */
 		} catch (Exception e) {
 			throw new RuntimeException("World loading failed: " + e);
 		}
