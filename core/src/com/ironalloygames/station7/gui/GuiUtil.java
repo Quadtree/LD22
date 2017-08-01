@@ -81,7 +81,7 @@ public class GuiUtil {
 	public static void init() {
 		TextureAtlas atlas = Sprites.atlas;
 
-		mainFont = new BitmapFont();
+		mainFont = new BitmapFont(Gdx.files.internal("ui/default.fnt"));
 		defaultLabelStyle = new LabelStyle(mainFont, Color.WHITE);
 		defaultDialogStyle = new WindowStyle(mainFont, Color.WHITE, new NinePatchDrawable(atlas.createPatch("dialog")));
 		defaultButtonStyle = new TextButtonStyle(new NinePatchDrawable(atlas.createPatch("button")), new NinePatchDrawable(atlas.createPatch("buttonclicked")), new NinePatchDrawable(atlas.createPatch("button")), mainFont);
