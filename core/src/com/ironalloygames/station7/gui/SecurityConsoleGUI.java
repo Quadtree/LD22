@@ -19,6 +19,8 @@ public class SecurityConsoleGUI extends WidgetAdapter {
 	final Label warningLabel = GuiUtil.createLabel("");
 
 	public SecurityConsoleGUI() {
+		setDialogBackground();
+
 		warningLabel.setText("!!! CODE RED !!!");
 		add(warningLabel);
 

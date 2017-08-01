@@ -18,6 +18,8 @@ public class DiagnosticConsoleGUI extends WidgetAdapter {
 
 	public DiagnosticConsoleGUI() {
 
+		setDialogBackground();
+
 		warningLabel.setText("!!! CODE RED !!!");
 		add(warningLabel);
 		lockdownLabel.setText("Sector lockdown in effect.");
@@ -65,13 +67,13 @@ public class DiagnosticConsoleGUI extends WidgetAdapter {
 
 		lockdownLabel.setPosition(100, this.getInnerBottom() - 200);
 
-		disengageButton.setPosition(450, this.getInnerBottom() - 250);
-		disengageButton.align(Align.center);
 		disengageButton.setSize(250, 90);
+		disengageButton.align(Align.center);
+		disengageButton.setPosition(450, this.getInnerBottom() - 250);
 
-		closeButton.setPosition(this.getInnerRight() - 300, this.getInnerBottom() - 150);
-		closeButton.align(Align.center);
 		closeButton.setSize(250, 90);
+		closeButton.align(Align.center);
+		closeButton.setPosition(this.getInnerRight() - 300, this.getInnerBottom() - 150);
 
 		super.layout();
 	}

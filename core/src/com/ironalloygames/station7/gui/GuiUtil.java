@@ -84,7 +84,7 @@ public class GuiUtil {
 		mainFont = new BitmapFont();
 		defaultLabelStyle = new LabelStyle(mainFont, Color.WHITE);
 		defaultDialogStyle = new WindowStyle(mainFont, Color.WHITE, new NinePatchDrawable(atlas.createPatch("dialog")));
-		defaultButtonStyle = new TextButtonStyle(new NinePatchDrawable(atlas.createPatch("button")), new NinePatchDrawable(atlas.createPatch("buttonclicked")), new NinePatchDrawable(atlas.createPatch("buttonclicked")), mainFont);
+		defaultButtonStyle = new TextButtonStyle(new NinePatchDrawable(atlas.createPatch("button")), new NinePatchDrawable(atlas.createPatch("buttonclicked")), new NinePatchDrawable(atlas.createPatch("button")), mainFont);
 		defaultTooltipStyle = new TextTooltipStyle(defaultLabelStyle, new NinePatchDrawable(atlas.createPatch("dialog")));
 	}
 }

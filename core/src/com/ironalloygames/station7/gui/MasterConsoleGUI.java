@@ -15,6 +15,8 @@ public class MasterConsoleGUI extends WidgetAdapter {
 	final Label warningLabel = GuiUtil.createLabel("");
 
 	public MasterConsoleGUI() {
+		setDialogBackground();
+
 		warningLabel.setText("!!! CODE RED !!!");
 		add(warningLabel);
 
